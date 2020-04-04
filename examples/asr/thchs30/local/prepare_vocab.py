@@ -17,8 +17,7 @@ if __name__ == "__main__":
     texts = pandas.read_csv(train_csv, sep='\t', usecols=['transcript'])
     for text in texts.itertuples():
         t = getattr(text, 'transcript')
-        items = t[0].strip().split(" ")
-        print(items)
+        items = t.strip().split()
         for item in items:
             if item in char_dict:
                 char_dict[item] += 1
@@ -26,6 +25,7 @@ if __name__ == "__main__":
                 char_dict[item] = 1
     
     idx = 0
+    print(len(char_dict))
     with codecs.open(vocab_file, "w", "utf-8") as f:
         for key in char_dict.keys():
             char_id_str = key + ' ' + str(idx) + '\n'

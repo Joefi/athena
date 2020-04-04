@@ -120,9 +120,13 @@ class SpeechRecognitionDatasetBuilder(BaseDatasetBuilder):
         self.entries.sort(key=lambda item: float(item[1]))
 
         # apply some filter
+        print("before filter by unk:{}".format(len(self.entries)))
         self.filter_sample_by_unk()
+        print("after filter by unk:{}".format(len(self.entries)))
         self.filter_sample_by_input_length()
+        print("afiter filter by input length:{}".format(len(self.entries)))
         self.filter_sample_by_output_length()
+        print("after filter by output length:{}".format(len(self.entries)))
         return self
 
     def load_csv(self, file_path):
@@ -203,9 +207,11 @@ class SpeechRecognitionDatasetBuilder(BaseDatasetBuilder):
             return self
         filter_entries = []
         unk = self.text_featurizer.unk_index
+        print("unk:{}".format(unk))
         if unk == -1:
             return self
         for items in self.entries:
+            print(self.text_featurizer.encode(items[2]))
             if unk not in self.text_featurizer.encode(items[2]):
                 filter_entries.append(items)
         self.entries = filter_entries
