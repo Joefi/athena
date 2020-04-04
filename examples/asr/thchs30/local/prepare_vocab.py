@@ -26,6 +26,7 @@ if __name__ == "__main__":
                     char_dict[char] = 1
     
     idx = 0
+    print(len(char_dict))
     with codecs.open(vocab_file, "w", "utf-8") as f:
         for key in char_dict.keys():
             char_id_str = key + ' ' + str(idx) + '\n'

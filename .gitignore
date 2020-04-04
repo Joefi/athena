@@ -16,5 +16,6 @@ tags
 /tools/sph2pipe
 /examples/asr/*/ckpts/
 examples/asr/*/data/*.csv
+examples/asr/*/data/cmvn
 
 
