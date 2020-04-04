@@ -18,15 +18,17 @@ if __name__ == "__main__":
     char_dict['<space>'] = 0
     texts = pandas.read_csv(train_csv, sep='\t', usecols=['transcript'])
     for text in texts.itertuples():
-        items = text.strip().split(" ")
-        for item in items[1:]:
+        t = getattr(text, 'transcript')
+        items = t[0].strip().split(" ")
+        print(items)
+        for item in items:
             if item in char_dict:
                 char_dict[item] += 1
             else:
                 char_dict[item] = 1
     
     idx = 0
-    with codecs.open(vocab_file, "r", "utf-8") as f
+    with codecs.open(vocab_file, "w", "utf-8") as f:
         for key in char_dict.keys():
             char_id_str = key + ' ' + str(idx) + '\n'
             f.write(char_id_str)
