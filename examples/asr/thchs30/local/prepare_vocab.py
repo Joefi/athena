@@ -3,8 +3,6 @@ from absl import logging
 import pandas
 import codecs
 
-
-
 if __name__ == "__main__":
     logging.set_verbosity(logging.INFO)
     if len(sys.argv) < 3:

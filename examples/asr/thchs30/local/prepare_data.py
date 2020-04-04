@@ -52,7 +52,7 @@ def convert_audio_and_split_transcript(dataset_dir, subset, out_csv_file):
     logging.info("Successfully generated csv file {}".format(out_csv_file))
 
 
-def processor(dircetory, subset, force_process):
+def processor(dataset_dir, subset, force_process, output_dir):
     if subset not in SUBSETS:
         raise ValueError(subset, "is not in thchs")
     if force_process:
