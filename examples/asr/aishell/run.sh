@@ -22,11 +22,11 @@ fi
 
 source tools/env.sh
 
-stage=0
+stage=3
 stop_stage=100
-horovod_cmd="horovodrun -np 4 -H localhost:4"
+horovod_cmd="horovodrun -np 2 -H localhost:2"
 horovod_prefix="horovod_"
-dataset_dir=/nfs/cold_project/datasets/opensource_data/aishell/data_aishell
+dataset_dir=/data/aishell/data_aishell
 
 if [ ${stage} -le 0 ] && [ ${stop_stage} -ge 0 ]; then
     # prepare data
@@ -46,12 +46,12 @@ if [ ${stage} -le 1 ] && [ ${stop_stage} -ge 1 ]; then
         examples/asr/aishell/configs/mpc.json examples/asr/aishell/data/all.csv || exit 1
 fi
 
-if [ ${stage} -le 2 ] && [ ${stop_stage} -ge 2 ]; then
-    # pretrain stage
-    echo "Pretraining"
-    $horovod_cmd python athena/${horovod_prefix}main.py \
-        examples/asr/aishell/configs/mpc.json || exit 1
-fi
+#if [ ${stage} -le 2 ] && [ ${stop_stage} -ge 2 ]; then
+#    # pretrain stage
+#    echo "Pretraining"
+#    $horovod_cmd python athena/${horovod_prefix}main.py \
+#        examples/asr/aishell/configs/mpc.json || exit 1
+#fi
 
 if [ ${stage} -le 3 ] && [ ${stop_stage} -ge 3 ]; then
     # finetuning stage
