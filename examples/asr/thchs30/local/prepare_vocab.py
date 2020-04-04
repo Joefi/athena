@@ -18,12 +18,12 @@ if __name__ == "__main__":
     for text in texts.itertuples():
         t = getattr(text, 'transcript')
         items = t[0].strip().split(" ")
-        print(items)
         for item in items:
-            if item in char_dict:
-                char_dict[item] += 1
-            else:
-                char_dict[item] = 1
+            for char in item:
+                if char in char_dict:
+                    char_dict[char] += 1
+                else:
+                    char_dict[char] = 1
     
     idx = 0
     with codecs.open(vocab_file, "w", "utf-8") as f:
