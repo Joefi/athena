@@ -13,9 +13,7 @@ if __name__ == "__main__":
 
     train_csv = sys.argv[1]
     vocab_file = sys.argv[2]
-    char_dict = {}
-    char_dict['<unk>'] = 0
-    char_dict['<space>'] = 0
+    char_dict = {'<unk>': 0, '<space>': 0}
     texts = pandas.read_csv(train_csv, sep='\t', usecols=['transcript'])
     for text in texts.itertuples():
         t = getattr(text, 'transcript')
@@ -33,6 +31,7 @@ if __name__ == "__main__":
             char_id_str = key + ' ' + str(idx) + '\n'
             f.write(char_id_str)
             idx += 1
+    print("Finished created vocab")
 
 
 
