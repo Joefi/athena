@@ -9,12 +9,11 @@ SUBSETS = ["train", "dev", "test"]
 
 def convert_audio_and_split_transcript(dataset_dir, subset, out_csv_file):
     """Convert tar.gz to WAV and split the transcript.
-
-	  Args:
-	    dataset_dir  : the directory which holds the input dataset.
-	    subset       : the name of the specified dataset. e.g. dev.
-	    out_csv_file : the resulting output csv file.
-	"""
+    Args:
+        dataset_dir  : the directory which holds the input dataset.
+        subset       : the name of the specified dataset. e.g. dev.
+        out_csv_file : the resulting output csv file.
+    """
 
     gfile = tf.compat.v1.gfile
     logging.info("Processing audio and transcript for {}".format(subset))
