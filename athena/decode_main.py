@@ -41,6 +41,7 @@ def decode(jsonfile, n=1, log_file=None):
     checkpoint_wer_dict = {}
     for line in open(log_file):
         if 'epoch:' in line:
+            print(line)
             splits = line.strip().split('\t')
             epoch = int(splits[0].split(' ')[-1])
             ctc_acc = float(splits[-1].split(' ')[-1])

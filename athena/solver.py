@@ -52,6 +52,7 @@ class BaseSolver(tf.keras.Model):
         # means we're running in GPU mode
         if len(gpus) != 0:
             assert len(gpus) > len(visible_gpu_idx)
+            print(gpus,visible_gpu_idx)
             for idx in visible_gpu_idx:
                 tf.config.experimental.set_visible_devices(gpus[idx], "GPU")
 

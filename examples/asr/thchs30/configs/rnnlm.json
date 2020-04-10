@@ -1,6 +1,6 @@
 {
   "batch_size":64,
-  "num_epochs":70,
+  "num_epochs":20,
   "sorta_epoch":1,
   "ckpt":"examples/asr/thchs30/ckpts/rnnlm",
 
@@ -36,13 +36,13 @@
   "dataset_builder": "language_dataset",
   "num_data_threads": 1,
   "trainset_config":{
-    "data_csv":"examples/asr/aishell/data/train.trans.csv",
-    "input_text_config":{"type":"vocab", "model":"examples/asr/aishell/data/vocab"},
-    "output_text_config":{"type":"vocab", "model":"examples/asr/aishell/data/vocab"}
+    "data_csv":"examples/asr/thchs30/data/train.trans.csv",
+    "input_text_config":{"type":"vocab", "model":"examples/asr/thchs30/data/vocab"},
+    "output_text_config":{"type":"vocab", "model":"examples/asr/thchs30/data/vocab"}
   },
   "devset_config":{
-    "data_csv":"examples/asr/aishell/data/dev.trans.csv",
-    "input_text_config":{"type":"vocab", "model":"examples/asr/aishell/data/vocab"},
-    "output_text_config":{"type":"vocab", "model":"examples/asr/aishell/data/vocab"}
+    "data_csv":"examples/asr/thchs30/data/dev.trans.csv",
+    "input_text_config":{"type":"vocab", "model":"examples/asr/thchs30/data/vocab"},
+    "output_text_config":{"type":"vocab", "model":"examples/asr/thchs30/data/vocab"}
   }
 }

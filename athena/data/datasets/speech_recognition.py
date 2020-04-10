@@ -207,11 +207,9 @@ class SpeechRecognitionDatasetBuilder(BaseDatasetBuilder):
             return self
         filter_entries = []
         unk = self.text_featurizer.unk_index
-        print("unk:{}".format(unk))
         if unk == -1:
             return self
         for items in self.entries:
-            print(self.text_featurizer.encode(items[2]))
             if unk not in self.text_featurizer.encode(items[2]):
                 filter_entries.append(items)
         self.entries = filter_entries

@@ -17,7 +17,7 @@ if __name__ == "__main__":
     texts = pandas.read_csv(train_csv, sep='\t', usecols=['transcript'])
     for text in texts.itertuples():
         t = getattr(text, 'transcript')
-        items = t[0].strip().split(" ")
+        items = t.strip().split(" ")
         for item in items:
             for char in item:
                 if char in char_dict:
