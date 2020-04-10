@@ -6,8 +6,47 @@ from athena import get_wave_file_length
 import pandas
 import tensorflow as tf
 import fnmatch
+import tarfile
+import tempfile
+from six.moves import urllib
 
 SUBSETS = ["train", "dev", "test"]
+
+
+def download_and_extract(directory, url):
+    """Download and extract the given split of dataset.
+
+    Args:
+        directory: the directory where to extract the tarball.
+        url: the url to download the data file.
+    """
+    gfile = tf.compat.v1.gfile
+
+    if not gfile.Exists(directory):
+        gfile.MakeDirs(directory)
+
+    _, tar_filepath = tempfile.mkstemp(suffix=".tar.gz")
+
+    try:
+        logging.info("Downloading %s to %s" % (url, tar_filepath))
+
+        def _progress(count, block_size, total_size):
+            sys.stdout.write(
+                "\r>> Downloading {} {:.1f}%".format(
+                    tar_filepath, 100.0 * count * block_size / total_size
+                )
+            )
+            sys.stdout.flush()
+
+        urllib.request.urlretrieve(url, tar_filepath, _progress)
+        statinfo = os.stat(tar_filepath)
+        logging.info(
+            "Successfully downloaded %s, size(bytes): %d" % (url, statinfo.st_size)
+        )
+        with tarfile.open(tar_filepath, "r") as tar:
+            tar.extractall(directory)
+    finally:
+        gfile.Remove(tar_filepath)
 
 
 def convert_audio_and_split_transcript(dataset_dir, subset, out_csv_file):
@@ -69,6 +108,7 @@ def processor(dataset_dir, subset, force_process, output_dir):
 
 if __name__ == "__main__":
     logging.set_verbosity(logging.INFO)
+    dataset_url = "http://www.openslr.org/resources/18/data_thchs30.tgz"
     if len(sys.argv) < 3:
         print('Usage: python {} dataset_dir output_dir\n'
               '    dataset_dir : directory contains thchs dataset\n'
@@ -76,5 +116,11 @@ if __name__ == "__main__":
         exit(1)
     DATASET_DIR = sys.argv[1]
     OUTPUT_DIR = sys.argv[2]
+
+    if not os.path.exists(DATASET_DIR):
+        # download dataset
+        download_and_extract(DATASET_DIR, dataset_url)
+
+    data_dir = os.path.join(DATASET_DIR, 'data_thchs30')
     for SUBSET in SUBSETS:
-        processor(DATASET_DIR, SUBSET, True, OUTPUT_DIR)
+        processor(data_dir, SUBSET, True, OUTPUT_DIR)
