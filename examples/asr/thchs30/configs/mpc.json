@@ -3,7 +3,7 @@
   "num_epochs":50,
   "sorta_epoch":5,
   "ckpt":"examples/asr/thchs30/ckpts/mpc",
-  "summary_dir":"examples/asr/aishell/ckpts/mpc/event",
+  "summary_dir":"examples/asr/thchs30/ckpts/mpc/event",
   "solver_gpu":[0],
   "solver_config":{
     "clip_norm":100,
@@ -38,18 +38,18 @@
     "data_csv": "examples/asr/thchs30/data/train.csv",
     "audio_config":{"type":"Fbank", "filterbank_channel_count":40},
     "cmvn_file":"examples/asr/thchs30/data/cmvn",
-    "input_length_range":[10, 8000]
+    "input_length_range":[10, 15000]
   },
   "devset_config":{
     "data_csv": "examples/asr/thchs30/data/dev.csv",
     "audio_config":{"type":"Fbank", "filterbank_channel_count":40},
     "cmvn_file":"examples/asr/thchs30/data/cmvn",
-    "input_length_range":[10, 8000]
+    "input_length_range":[10, 15000]
   },
   "testset_config":{
     "data_csv": "examples/asr/thchs30/data/test.csv",
     "audio_config":{"type":"Fbank", "filterbank_channel_count":40},
     "cmvn_file":"examples/asr/thchs30/data/cmvn",
-    "input_length_range":[10, 8000]
+    "input_length_range":[10, 15000]
   }
 }
