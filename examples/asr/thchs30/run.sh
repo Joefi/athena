@@ -38,6 +38,13 @@ fi
 
 if [ ${stage} -le 1 ] && [ ${stop_stage} -ge 1 ]; then
     # calculate cmvn
+    echo "Prepare vocab"
+    python examples/asr/thchs30/local/prepare_vocab.py \
+        examples/asr/thchs30/data/train.csv examples/asr/thchs30/data/vocab || exit 1
+fi
+
+if [ ${stage} -le 2 ] && [ ${stop_stage} -ge 2 ]; then
+    # calculate cmvn
     echo "Computing cmvn"
     cat examples/asr/thchs30/data/train.csv > examples/asr/thchs30/data/all.csv
     tail -n +2 examples/asr/thchs30/data/dev.csv >> examples/asr/thchs30/data/all.csv
