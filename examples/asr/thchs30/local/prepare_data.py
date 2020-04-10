@@ -100,9 +100,9 @@ def processor(dataset_dir, subset, force_process, output_dir):
     if not force_process and os.path.exists(subset_csv):
         logging.info("{} already exist".format(subset_csv))
         return subset_csv
-    logging.info("Processing the AISHELL subset {} in {}".format(subset, dataset_dir))
+    logging.info("Processing the thchs30 subset {} in {}".format(subset, dataset_dir))
     convert_audio_and_split_transcript(dataset_dir, subset, subset_csv)
-    logging.info("Finished processing AISHELL subset {}".format(subset))
+    logging.info("Finished processing thchs30 subset {}".format(subset))
     return subset_csv
 
 
