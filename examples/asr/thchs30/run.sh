@@ -22,11 +22,11 @@ fi
 
 source tools/env.sh
 
-stage=4
+stage=0
 stop_stage=100
 horovod_cmd="horovodrun -np 2 -H localhost:2"
 horovod_prefix="horovod_"
-dataset_dir=/data/thchs30/data_thchs30
+dataset_dir=/data/thchs30
 
 if [ ${stage} -le 0 ] && [ ${stop_stage} -ge 0 ]; then
     # prepare data

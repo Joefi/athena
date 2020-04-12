@@ -59,7 +59,7 @@ def convert_audio_and_split_transcript(dataset_dir, subset, out_csv_file):
     gfile = tf.compat.v1.gfile
     logging.info("Processing audio and transcript for {}".format(subset))
     src_dir = os.path.join(dataset_dir, subset)
-    tar_dir = os.path.join(dataset_dir, 'data')
+    tar_dir = os.path.join(dataset_dir, 'data_copy')
 
     if not gfile.Exists(src_dir):
         raise ValueError(src_dir, "directory is not exists.")

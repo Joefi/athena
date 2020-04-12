@@ -1,6 +1,6 @@
 {
   "batch_size":8,
-  "num_epochs":10,
+  "num_epochs":5,
   "sorta_epoch":1,
   "ckpt":"examples/asr/thchs30/ckpts/mtl_transformer_ctc/",
   "summary_dir":"examples/asr/thchs30/ckpts/mtl_transformer_ctc/event",
@@ -22,8 +22,8 @@
       "num_filters":512,
       "d_model":512,
       "num_heads":8,
-      "num_encoder_layers":5,
-      "num_decoder_layers":3,
+      "num_encoder_layers":4,
+      "num_decoder_layers":2,
       "dff":1280,
       "rate":0.1,
       "label_smoothing_rate":0.0,
@@ -68,7 +68,7 @@
     "input_length_range":[10, 15000]
   },
   "testset_config":{
-    "data_csv": "examples/asr/thchs30/data/test_subset.csv",
+    "data_csv": "examples/asr/thchs30/data/test.csv",
     "audio_config": {"type":"Fbank", "filterbank_channel_count":40},
     "cmvn_file":"examples/asr/thchs30/data/cmvn",
     "text_config": {"type":"vocab", "model":"examples/asr/thchs30/data/vocab"},

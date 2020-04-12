@@ -18,7 +18,7 @@
   "model_config":{
     "d_model": 512,
     "rnn_type": "lstm",
-    "num_layer": 2,
+    "num_layer": 3,
     "dropout_rate": 0.1,
     "sos": -1,
     "eos": -1
