@@ -137,7 +137,7 @@ class DecoderSolver(BaseSolver):
         self.hparams = register_and_parse_hparams(self.default_config, config, cls=self.__class__)
         self.lm_model = lm_model
 
-    def decode(self, dataset):
+    def decode(self, dataset, dataset_builder=None):
         """ decode the model """
         if dataset is None:
             return
@@ -149,15 +149,30 @@ class DecoderSolver(BaseSolver):
             validated_preds = validate_seqs(predictions, self.model.eos)[0]
             validated_preds = tf.cast(validated_preds, tf.int64)
             num_errs, _ = metric.update_state(validated_preds, samples)
-            reports = (
-                "predictions: %s\tlabels: %s\terrs: %d\tavg_acc: %.4f\tsec/iter: %.4f"
-                % (
-                    predictions,
-                    samples["output"].numpy(),
-                    num_errs,
-                    metric.result(),
-                    time.time() - begin,
+
+            if dataset_builder is not None:
+                samples_text = dataset_builder.text_featurizer.decode(samples["output"].numpy())
+                predictions_text = dataset_builder.text_featurizer.decode(predictions)
+                reports = (
+                        "predictions: %s\tlabels: %s\terrs: %d\tavg_acc: %.4f\tsec/iter: %.4f"
+                        % (
+                            predictions_text,
+                            samples_text,
+                            num_errs,
+                            metric.result(),
+                            time.time() - begin,
+                        )
                 )
-            )
+            else:
+                reports = (
+                    "predictions: %s\tlabels: %s\terrs: %d\tavg_acc: %.4f\tsec/iter: %.4f"
+                    % (
+                        predictions,
+                        samples["output"].numpy(),
+                        num_errs,
+                        metric.result(),
+                        time.time() - begin,
+                    )
+                )
             logging.info(reports)
         logging.info("decoding finished")

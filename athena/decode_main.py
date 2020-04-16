@@ -69,7 +69,7 @@ def decode(jsonfile, n=1, log_file=None):
     assert p.testset_config is not None
     dataset_builder = SUPPORTED_DATASET_BUILDER[p.dataset_builder](p.testset_config)
     dataset_builder = dataset_builder.compute_cmvn_if_necessary(True)
-    solver.decode(dataset_builder.as_dataset(batch_size=1))
+    solver.decode(dataset_builder.as_dataset(batch_size=1),dataset_builder)
 
 
 if __name__ == "__main__":
